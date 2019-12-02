@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 namespace UnitySteeringLib
 {
-	public partial class SteeringMovementModule : MovementModule 
-	{
+    public partial class SteeringMovementModule : MovementModule
+    {
 
-        private Vector3 stepAlignment(IList<IAgent> agents) 
+        private Vector3 stepAlignment(IList<IAgent> agents)
         {
             var heading = Vector3.zero;
             var neighboursAmount = 0;
 
-            for (var i = 0; i < agents.Count; i++) 
+            for (var i = 0; i < agents.Count; i++)
             {
                 var a = agents[i];
-                if (a != owner) 
+                if (a != owner)
                 {
                     var distance = Vector3.Distance(owner.getPosition(), a.getPosition());
-                    if (distance < maxCohesion && a.getVelocity().magnitude > 0) 
+                    if (distance < maxCohesion && a.getVelocity().magnitude > 0)
                     {
                         heading += a.getVelocity().normalized;
                         neighboursAmount++;
@@ -25,7 +25,7 @@ namespace UnitySteeringLib
                 }
             }
 
-            if (neighboursAmount > 0) 
+            if (neighboursAmount > 0)
             {
                 heading /= neighboursAmount;
 
@@ -36,6 +36,6 @@ namespace UnitySteeringLib
 
             return Vector3.zero;
         }
-	}
+    }
 
 }

@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace UnitySteeringLib
 {
-	public partial class SteeringMovementModule : MovementModule 
-	{
+    public partial class SteeringMovementModule : MovementModule
+    {
         private Vector3 stepFlocking()
         {
             var target = steeringOwner.getTarget();
-            if(owner.hasGroup())
+            if (owner.hasGroup())
             {
                 var agents = owner.getGroup().getMembers();
 

@@ -3,8 +3,8 @@ using System.Linq;
 
 namespace UnitySteeringLib
 {
-	public partial class SteeringMovementModule : MovementModule 
-	{
+    public partial class SteeringMovementModule : MovementModule
+    {
         [Header("Follow")]
         public float followDistance = 3f;
 

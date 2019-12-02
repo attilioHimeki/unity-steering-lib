@@ -7,7 +7,6 @@ namespace UnitySteeringLib
     {
         public float minSpeed = 0.5f;
         public float maxForce = 15f;
-
         private SteeringAgent steeringOwner;
 
         public SteeringMovementModule(IAgent agent)
@@ -16,16 +15,16 @@ namespace UnitySteeringLib
             steeringOwner = agent as SteeringAgent;
         }
 
-        public override Vector3 getStep(float dt) 
+        public override Vector3 getStep(float dt)
         {
             var target = steeringOwner.getTarget();
-            if(target == null)
+            if (target == null)
             {
                 return Vector3.zero;
             }
 
             Vector3 steering = Vector3.zero;
-            switch(steeringOwner.currentBehaviour)
+            switch (steeringOwner.currentBehaviour)
             {
                 case SteeringBehaviour.Seek:
                     steering = stepSeek(target.getPosition());
@@ -49,19 +48,19 @@ namespace UnitySteeringLib
                     steering = stepFlocking();
                     break;
             }
-            
+
             steering = Vector3.ClampMagnitude(steering, maxForce);
             steering /= owner.getMass();
 
             velocity = Vector3.ClampMagnitude(velocity + steering, owner.getMaxSpeed());
 
-            if(velocity.magnitude > minSpeed)
+            if (velocity.magnitude > minSpeed)
             {
                 return velocity * dt;
-            }   
+            }
 
             return Vector3.zero;
-            
+
         }
 
     }

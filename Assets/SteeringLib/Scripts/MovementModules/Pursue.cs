@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace UnitySteeringLib
 {
-	public partial class SteeringMovementModule : MovementModule 
-	{
+    public partial class SteeringMovementModule : MovementModule
+    {
         private Vector3 stepPursue(IAgent target)
         {
             var posDistance = target.getPosition() - owner.getPosition();

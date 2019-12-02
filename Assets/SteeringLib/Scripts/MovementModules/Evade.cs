@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace UnitySteeringLib
 {
-	public partial class SteeringMovementModule : MovementModule 
-	{
+    public partial class SteeringMovementModule : MovementModule
+    {
         private Vector3 stepEvade(Vector3 targetPosition)
         {
             var target = steeringOwner.getTarget();
