@@ -3,6 +3,8 @@
 	public class SteeringAgent : Agent 
 	{
 		public SteeringBehaviour currentBehaviour;
+		public bool avoidObstacles = true;
+
 		private SteeringMovementModule steeringMovementModule;
 		private IAgent target;
 

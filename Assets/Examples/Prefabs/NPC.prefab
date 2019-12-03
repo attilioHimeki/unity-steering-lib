@@ -96,5 +96,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 15
   mass: 1
-  radius: 0.7
+  radius: 0.4
   currentBehaviour: 1

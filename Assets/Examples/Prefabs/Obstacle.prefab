@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   mass: 15
-  radius: 15
+  radius: 1
 --- !u!135 &135638376277130730
 SphereCollider:
   m_ObjectHideFlags: 1

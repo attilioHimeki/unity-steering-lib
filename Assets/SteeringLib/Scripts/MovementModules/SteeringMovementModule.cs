@@ -49,6 +49,12 @@ namespace UnitySteeringLib
                     break;
             }
 
+            if(steeringOwner.avoidObstacles)
+            {
+                var obstacles = steeringOwner.world.getObstaclesForSector(steeringOwner.getPosition());
+                steering += stepCollisionAvoidance(obstacles);
+            }
+
             steering = Vector3.ClampMagnitude(steering, maxForce);
             steering /= owner.getMass();
 

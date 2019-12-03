@@ -1,24 +1,24 @@
 ﻿using UnityEngine;
 using UnitySteeringLib;
-public class SimpleInputMovementModule : MovementModule 
+public class SimpleInputMovementModule : MovementModule
 {
-	private Vector3 lastPosition;
-	public SimpleInputMovementModule(IAgent agent)
-	: base(agent)
-	{
-		lastPosition = agent.getPosition();
-	}
-	
-	public override Vector3 getStep(float dt) 
-	{
-		var inputH = Input.GetAxisRaw("Horizontal");
-		var inputV = Input.GetAxisRaw("Vertical");
+    private Vector3 lastPosition;
+    public SimpleInputMovementModule(IAgent agent)
+    : base(agent)
+    {
+        lastPosition = agent.getPosition();
+    }
 
-		var movementDirection = new Vector3(inputH, 0f, inputV).normalized;
+    public override Vector3 getStep(float dt)
+    {
+        var inputH = Input.GetAxisRaw("Horizontal");
+        var inputV = Input.GetAxisRaw("Vertical");
 
-		var steering = movementDirection * owner.getMaxSpeed();
+        var movementDirection = new Vector3(inputH, 0f, inputV).normalized;
 
-		return steering;
-	}
+        var steering = movementDirection * owner.getMaxSpeed();
+
+        return steering;
+    }
 
 }
