@@ -55,7 +55,6 @@ public class ExampleWorld : MonoBehaviour, IWorldContextInfoProvider
             npcGroup.setLeader(leader);
 
             npcGroup.addMembers(npcs);
-
         }
     }
 
