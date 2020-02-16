@@ -5,7 +5,6 @@ namespace UnitySteeringLib
 {
     public partial class SteeringMovementModule : MovementModule
     {
-
         private Vector3 stepAlignment(IList<IAgent> agents)
         {
             var heading = Vector3.zero;
@@ -31,7 +30,7 @@ namespace UnitySteeringLib
 
                 var desired = heading * owner.getMaxSpeed();
                 var steering = desired - velocity;
-                return steering * (maxForce / owner.getMaxSpeed());
+                return steering * (owner.getMaxForce() / owner.getMaxSpeed());
             }
 
             return Vector3.zero;

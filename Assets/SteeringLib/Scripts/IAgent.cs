@@ -9,6 +9,7 @@ namespace UnitySteeringLib
 		float getRadius();
 		Vector3 getVelocity();
 		float getMaxSpeed();
+		float getMaxForce();
 		Vector3 getPosition();
 		void update(float dt);
 		void setPosition(Vector3 pos);

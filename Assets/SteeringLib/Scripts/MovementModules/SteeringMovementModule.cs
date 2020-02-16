@@ -6,7 +6,6 @@ namespace UnitySteeringLib
     public partial class SteeringMovementModule : MovementModule
     {
         public float minSpeed = 0.5f;
-        public float maxForce = 15f;
         private SteeringAgent steeringOwner;
 
         public SteeringMovementModule(IAgent agent)
@@ -26,36 +25,36 @@ namespace UnitySteeringLib
             Vector3 steering = Vector3.zero;
             switch (steeringOwner.currentBehaviour)
             {
-                case SteeringBehaviour.Seek:
+                case SteeringBehaviourId.Seek:
                     steering = stepSeek(target.getPosition());
                     break;
-                case SteeringBehaviour.Arrival:
+                case SteeringBehaviourId.Arrival:
                     steering = stepArrival(target.getPosition());
                     break;
-                case SteeringBehaviour.Flee:
+                case SteeringBehaviourId.Flee:
                     steering = stepFlee(target.getPosition());
                     break;
-                case SteeringBehaviour.Pursue:
+                case SteeringBehaviourId.Pursue:
                     steering = stepPursue(target);
                     break;
-                case SteeringBehaviour.Evade:
+                case SteeringBehaviourId.Evade:
                     steering = stepEvade(target.getPosition());
                     break;
-                case SteeringBehaviour.Follow:
+                case SteeringBehaviourId.Follow:
                     steering = stepFollow(target.getPosition());
                     break;
-                case SteeringBehaviour.Flocking:
+                case SteeringBehaviourId.Flocking:
                     steering = stepFlocking();
                     break;
             }
 
             if(steeringOwner.avoidObstacles)
             {
-                var obstacles = steeringOwner.world.getObstaclesForSector(steeringOwner.getPosition());
+                var obstacles = steeringOwner.world.getObstaclesForSector(owner.getPosition());
                 steering += stepCollisionAvoidance(obstacles);
             }
 
-            steering = Vector3.ClampMagnitude(steering, maxForce);
+            steering = Vector3.ClampMagnitude(steering, owner.getMaxForce());
             steering /= owner.getMass();
 
             velocity = Vector3.ClampMagnitude(velocity + steering, owner.getMaxSpeed());

@@ -8,6 +8,8 @@ namespace UnitySteeringLib
         [SerializeField]
         protected internal float maxSpeed = 15f;
         [SerializeField]
+        protected internal float maxForce = 15f;
+        [SerializeField]
         protected internal float mass = 15f;
         [SerializeField]
         protected internal float radius = 15f;
@@ -78,6 +80,11 @@ namespace UnitySteeringLib
         public float getMaxSpeed()
         {
             return maxSpeed;
+        }
+
+        public float getMaxForce()
+        {
+            return maxForce;
         }
 
         public virtual Vector3 getVelocity()

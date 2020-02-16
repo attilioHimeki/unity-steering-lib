@@ -2,7 +2,7 @@
 {
 	public class SteeringAgent : Agent 
 	{
-		public SteeringBehaviour currentBehaviour;
+		public SteeringBehaviourId currentBehaviour;
 		public bool avoidObstacles = true;
 
 		private SteeringMovementModule steeringMovementModule;
@@ -14,7 +14,7 @@
 			movementModule = steeringMovementModule;
 		}
 
-		public void setBehaviour(SteeringBehaviour behaviour)
+		public void setBehaviour(SteeringBehaviourId behaviour)
 		{
 			currentBehaviour = behaviour;
 		}

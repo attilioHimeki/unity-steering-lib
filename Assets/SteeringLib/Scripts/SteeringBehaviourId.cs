@@ -1,6 +1,6 @@
 ﻿namespace UnitySteeringLib
 {
-    public enum SteeringBehaviour
+    public enum SteeringBehaviourId
     {
         None,
         Seek,
