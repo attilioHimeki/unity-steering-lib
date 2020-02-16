@@ -34,8 +34,12 @@ namespace UnitySteeringLib
         public virtual void update(float dt)
         {
             var steering = movementModule.getStep(dt);
-            setForward(steering.normalized);
-            translate(steering);
+            if (steering.sqrMagnitude > Mathf.Epsilon)
+            {
+                var movementStep = steering * dt;
+                setForward(steering.normalized);
+                translate(movementStep);
+            }
         }
 
         public Vector3 getPosition()

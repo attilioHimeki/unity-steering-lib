@@ -61,7 +61,7 @@ namespace UnitySteeringLib
 
             if (velocity.magnitude > minSpeed)
             {
-                return velocity * dt;
+                return velocity;
             }
 
             return Vector3.zero;

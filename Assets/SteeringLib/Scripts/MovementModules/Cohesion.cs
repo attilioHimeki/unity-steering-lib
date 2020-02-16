@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace UnitySteeringLib
 {
@@ -8,30 +7,36 @@ namespace UnitySteeringLib
         [Header("Cohesion")]
         public float maxCohesion = 10f;
         
-        private Vector3 stepCohesion(IList<IAgent> agents)
+        private Vector3 stepCohesion()
         {
             var centerOfMass = owner.getPosition();
             var neighboursAmount = 1;
 
-            for (var i = 0; i < agents.Count; i++)
+            var ownerGroup = owner.getGroup();
+            if(ownerGroup != null)
             {
-                var a = agents[i];
-                if (a != owner)
+                var members = ownerGroup.getMembers();
+
+                for (var i = 0; i < members.Count; i++)
                 {
-                    var distance = Vector3.Distance(owner.getPosition(), a.getPosition());
-                    if (distance < maxCohesion)
+                    var a = members[i];
+                    if (a != owner)
                     {
-                        centerOfMass += a.getPosition();
-                        neighboursAmount++;
+                        var distance = Vector3.Distance(owner.getPosition(), a.getPosition());
+                        if (distance < maxCohesion)
+                        {
+                            centerOfMass += a.getPosition();
+                            neighboursAmount++;
+                        }
                     }
                 }
-            }
 
-            if (neighboursAmount > 1)
-            {
-                centerOfMass /= neighboursAmount;
+                if (neighboursAmount > 1)
+                {
+                    centerOfMass /= neighboursAmount;
 
-                return stepSeek(centerOfMass);
+                    return stepSeek(centerOfMass);
+                }
             }
 
             return Vector3.zero;

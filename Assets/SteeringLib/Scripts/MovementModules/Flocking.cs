@@ -13,8 +13,8 @@ namespace UnitySteeringLib
 
                 var steering = stepArrival(target.getPosition());
                 steering += stepSeparation();
-                steering += stepCohesion(agents) * 0.2f;
-                steering += stepAlignment(agents);
+                steering += stepCohesion() * 0.2f;
+                steering += stepAlignment();
 
                 return steering;
             }
