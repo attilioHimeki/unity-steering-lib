@@ -2,15 +2,18 @@ using UnityEngine;
 
 namespace UnitySteeringLib
 {
-    public partial class SteeringMovementModule : MovementModule
+    public class Alignment : SteeringBehaviour
     {
-        [Header("Cohesion")]
-        public float maxCohesion = 10f;
-        
-        private Vector3 stepCohesion()
+
+        public Alignment(SteeringAgent owner)
+        : base(owner)
         {
-            var centerOfMass = owner.getPosition();
-            var neighboursAmount = 1;
+        }
+        
+        public override Vector3 step()
+        {
+            var heading = Vector3.zero;
+            var neighboursAmount = 0;
 
             var ownerGroup = owner.getGroup();
             if(ownerGroup != null)
@@ -23,23 +26,26 @@ namespace UnitySteeringLib
                     if (a != owner)
                     {
                         var distance = Vector3.Distance(owner.getPosition(), a.getPosition());
-                        if (distance < maxCohesion)
+                        if (a.getVelocity().sqrMagnitude > 0)
                         {
-                            centerOfMass += a.getPosition();
+                            heading += a.getVelocity().normalized;
                             neighboursAmount++;
                         }
                     }
                 }
 
-                if (neighboursAmount > 1)
+                if (neighboursAmount > 0)
                 {
-                    centerOfMass /= neighboursAmount;
+                    heading /= neighboursAmount;
 
-                    return stepSeek(centerOfMass);
+                    var desired = heading * owner.getMaxSpeed();
+                    var steering = desired - owner.getVelocity();
+                    return steering * (owner.getMaxForce() / owner.getMaxSpeed());
                 }
             }
 
             return Vector3.zero;
         }
     }
+
 }

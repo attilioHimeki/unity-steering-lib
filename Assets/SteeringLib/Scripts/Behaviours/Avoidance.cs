@@ -2,16 +2,20 @@ using UnityEngine;
 
 namespace UnitySteeringLib
 {
-    public partial class SteeringMovementModule : MovementModule
+    public class Avoidance : SteeringBehaviour
     {
-
-        [Header("Avoidance")]
         public float minObstacleAvoidanceDistance = 3f;
         public float maxAvoidanceForce = 20f;
-        public float maxAvoidanceBrakingForce = 1f;
+        public float maxAvoidanceBrakingForce = 2f;
 
-        private Vector3 stepCollisionAvoidance(IAgent[] obstacles)
+        public Avoidance(SteeringAgent owner)
+        : base(owner)
         {
+        }
+
+        public override Vector3 step()
+        {
+            var obstacles = owner.getWorldContext().getObstaclesForSector(owner.getPosition());
             if (obstacles.Length > 0 && minObstacleAvoidanceDistance > 0f)
             {
                 var closest = getClosestAvoidanceObstacle(obstacles);

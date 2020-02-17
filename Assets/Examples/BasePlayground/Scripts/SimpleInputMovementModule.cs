@@ -16,6 +16,8 @@ public class SimpleInputMovementModule : MovementModule
 
         var steering = movementDirection * owner.getMaxSpeed();
 
+        velocity = steering;
+
         return steering;
     }
 

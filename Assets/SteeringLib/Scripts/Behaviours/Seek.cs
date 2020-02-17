@@ -2,11 +2,16 @@
 
 namespace UnitySteeringLib
 {
-    public partial class SteeringMovementModule : MovementModule
+    public class Seek : SteeringBehaviour
     {
-        private Vector3 stepSeek(Vector3 targetPosition)
+        public Seek(SteeringAgent owner)
+        : base(owner)
         {
-            var desiredVelocity = targetPosition - owner.getPosition();
+        }
+
+        public override Vector3 step()
+        {
+            var desiredVelocity = owner.target.getPosition() - owner.getPosition();
             desiredVelocity = desiredVelocity.normalized * owner.getMaxSpeed();
 
             var steering = desiredVelocity - owner.getVelocity();

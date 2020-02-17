@@ -2,31 +2,25 @@
 {
 	public class SteeringAgent : Agent 
 	{
-		public SteeringBehaviourId currentBehaviour;
+		public SteeringBehaviourId initialBehaviour;
 		public bool avoidObstacles = true;
-
+		public IAgent target { get; set; }
 		private SteeringMovementModule steeringMovementModule;
-		private IAgent target;
 
 		protected override void setupMovementModule()
 		{
 			steeringMovementModule = new SteeringMovementModule(this);
 			movementModule = steeringMovementModule;
+
+			if(initialBehaviour != SteeringBehaviourId.None)
+			{
+				steeringMovementModule.setBehaviour(initialBehaviour);
+			}
 		}
 
 		public void setBehaviour(SteeringBehaviourId behaviour)
 		{
-			currentBehaviour = behaviour;
-		}
-
-		public void setTarget(IAgent trg)
-		{
-			target = trg;
-		}
-
-		public IAgent getTarget()
-		{
-			return target;
+			steeringMovementModule.setBehaviour(behaviour);
 		}
 
 	}

@@ -39,7 +39,7 @@ public class ExampleWorld : MonoBehaviour, IWorldContextInfoProvider
         {
             var npc = nonPlayingCharacters[i].GetComponent<SteeringAgent>();
             npc.initialise(this);
-            npc.setTarget(player);
+            npc.target = player;
 
             npcs[i] = npc;
         }

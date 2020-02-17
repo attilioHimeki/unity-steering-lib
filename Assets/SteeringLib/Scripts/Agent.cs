@@ -1,5 +1,5 @@
-
 using UnityEngine;
+
 namespace UnitySteeringLib
 {
     public class Agent : MonoBehaviour, IAgent
@@ -7,6 +7,8 @@ namespace UnitySteeringLib
 
         [SerializeField]
         protected internal float maxSpeed = 15f;
+        [SerializeField]
+        protected internal float minSpeed = 1f;
         [SerializeField]
         protected internal float maxForce = 15f;
         [SerializeField]
@@ -34,7 +36,7 @@ namespace UnitySteeringLib
         public virtual void update(float dt)
         {
             var steering = movementModule.getStep(dt);
-            if (steering.sqrMagnitude > Mathf.Epsilon)
+            if (steering.sqrMagnitude >= minSpeed * minSpeed)
             {
                 var movementStep = steering * dt;
                 setForward(steering.normalized);
@@ -84,6 +86,11 @@ namespace UnitySteeringLib
         public float getMaxSpeed()
         {
             return maxSpeed;
+        }
+
+        public float getMinSpeed()
+        {
+            return minSpeed;
         }
 
         public float getMaxForce()

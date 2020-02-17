@@ -1,14 +1,17 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace UnitySteeringLib
 {
-    public partial class SteeringMovementModule : MovementModule
+    public class Separation : SteeringBehaviour
     {
-        [Header("Separation")]
         public float minSeparationDistance = 3f;
 
-        public Vector3 stepSeparation()
+        public Separation(SteeringAgent owner)
+        : base(owner)
+        {
+        }
+
+        public override Vector3 step()
         {
             var totalForce = Vector3.zero;
             var neighboursAmount = 0;
