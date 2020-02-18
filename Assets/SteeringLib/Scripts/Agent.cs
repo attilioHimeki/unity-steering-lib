@@ -17,7 +17,6 @@ namespace UnitySteeringLib
         protected internal float radius = 15f;
 
         protected internal MovementModule movementModule;
-
         protected internal IWorldContextInfoProvider world;
         protected internal AgentsGroup currentGroup;
 

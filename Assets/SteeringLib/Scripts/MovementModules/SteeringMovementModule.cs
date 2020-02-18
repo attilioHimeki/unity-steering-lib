@@ -5,13 +5,14 @@ using System.Linq;
 
 namespace UnitySteeringLib
 {
-    public partial class SteeringMovementModule : MovementModule
+    public class SteeringMovementModule : MovementModule
     {
         private SteeringAgent steeringOwner;
         private Dictionary<SteeringBehaviourId, SteeringBehaviour> steeringBehaviours;
         private SteeringBehaviour currentBehaviour;
         private SteeringBehaviour avoidanceBehaviour;
         private static Dictionary<SteeringBehaviourId, System.Type> behavioursMappings;
+        
         static SteeringMovementModule()
         {
             behavioursMappings = new Dictionary<SteeringBehaviourId, Type>();
