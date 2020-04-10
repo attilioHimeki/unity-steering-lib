@@ -80,7 +80,7 @@ namespace Himeki.AI.Steering
 
         public override Vector3 getStep(float dt)
         {
-            var target = steeringOwner.target;
+            IAgent target = steeringOwner.target;
 
             if (target == null || currentBehaviour == null)
             {
@@ -95,9 +95,10 @@ namespace Himeki.AI.Steering
             }
 
             steering = Vector3.ClampMagnitude(steering, owner.getMaxForce());
-            steering /= owner.getMass();
-
-            velocity = Vector3.ClampMagnitude(velocity + steering, owner.getMaxSpeed());
+            
+            Vector3 acceleration = steering / owner.getMass();
+            velocity += acceleration * dt;
+            velocity = Vector3.ClampMagnitude(velocity, owner.getMaxSpeed());
 
             return velocity;
         }
