@@ -10,3 +10,4 @@ UnityPackageManager
 obj
 *.sln
 *.DS_STORE
+*.vs
