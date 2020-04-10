@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnitySteeringLib;
+using Himeki.AI.Steering;
 
 // A rather simple implementation of a World context to showcase the various steering behaviours.
 public class ExampleWorld : MonoBehaviour, IWorldContextInfoProvider

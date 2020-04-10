@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace UnitySteeringLib
+namespace Himeki.AI.Steering
 {
     public abstract class CompoundSteeringBehaviour : SteeringBehaviour
     {

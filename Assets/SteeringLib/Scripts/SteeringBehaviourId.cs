@@ -1,4 +1,4 @@
-﻿namespace UnitySteeringLib
+﻿namespace Himeki.AI.Steering
 {
     public enum SteeringBehaviourId
     {

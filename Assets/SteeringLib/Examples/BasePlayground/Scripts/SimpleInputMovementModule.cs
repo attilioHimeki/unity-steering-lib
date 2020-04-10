@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnitySteeringLib;
+using Himeki.AI.Steering;
 public class SimpleInputMovementModule : MovementModule
 {
     public SimpleInputMovementModule(IAgent agent)

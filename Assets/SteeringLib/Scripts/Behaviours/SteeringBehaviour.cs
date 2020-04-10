@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UnitySteeringLib
+namespace Himeki.AI.Steering
 {
     public abstract class SteeringBehaviour
     {

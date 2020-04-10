@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace UnitySteeringLib
+namespace Himeki.AI.Steering
 {
     public class AgentsGroup
     {

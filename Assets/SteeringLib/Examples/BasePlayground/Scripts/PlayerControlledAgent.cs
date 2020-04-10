@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
+using Himeki.AI.Steering;
 
-namespace UnitySteeringLib
+public class PlayerControlledAgent : Agent
 {
-    public class PlayerControlledAgent : Agent
+    protected override void setupMovementModule()
     {
-        protected override void setupMovementModule()
-        {
-            movementModule = new SimpleInputMovementModule(this);
-        }
-
+        movementModule = new SimpleInputMovementModule(this);
     }
+
 }
