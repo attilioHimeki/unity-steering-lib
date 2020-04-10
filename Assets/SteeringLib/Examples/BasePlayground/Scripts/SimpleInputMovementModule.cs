@@ -12,13 +12,17 @@ public class SimpleInputMovementModule : MovementModule
         var inputH = Input.GetAxisRaw("Horizontal");
         var inputV = Input.GetAxisRaw("Vertical");
 
-        var movementDirection = new Vector3(inputH, 0f, inputV).normalized;
+        var inputVector = new Vector3(inputH, 0f, inputV);
+        if(inputVector.sqrMagnitude > Mathf.Epsilon)
+        {
+            var movementDirection = inputVector.normalized;
 
-        var steering = movementDirection * owner.getMaxSpeed();
+            var steering = movementDirection * owner.getMaxSpeed();
 
-        velocity = steering;
+            return steering;
+        }
 
-        return steering;
+        return Vector3.zero;
     }
 
 }
