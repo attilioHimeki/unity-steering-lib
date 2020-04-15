@@ -5,8 +5,8 @@ namespace Himeki.AI.Steering
     public class Avoidance : SteeringBehaviour
     {
         public float minObstacleAvoidanceDistance = 3f;
-        public float maxAvoidanceForce = 20f;
-        public float maxAvoidanceBrakingForce = 2f;
+        public float maxAvoidanceForce = 30f;
+        public float maxAvoidanceBrakingForce = 4f;
 
         public Avoidance(SteeringAgent owner)
         : base(owner)
@@ -21,9 +21,10 @@ namespace Himeki.AI.Steering
                 var closest = getClosestAvoidanceObstacle(obstacles);
                 if(closest != null)
                 {
-                    var distanceVector = closest.getPosition() - owner.getPosition();
+                    Vector3 distanceVector = closest.getPosition() - owner.getPosition();
+                    float distance = distanceVector.magnitude;
 
-                    float brakingMultiplier = (minObstacleAvoidanceDistance - distanceVector.magnitude) / minObstacleAvoidanceDistance;
+                    float brakingMultiplier = (minObstacleAvoidanceDistance - distance) / minObstacleAvoidanceDistance;
                     var braking = owner.getForward() * brakingMultiplier * maxAvoidanceBrakingForce;
 
                     var lateralSteering = (owner.getForward() - distanceVector.normalized) * maxAvoidanceForce;

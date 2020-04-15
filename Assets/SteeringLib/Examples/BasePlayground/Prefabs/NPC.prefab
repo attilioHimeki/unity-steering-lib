@@ -96,8 +96,8 @@ MonoBehaviour:
   minSpeed: 1
   maxForce: 15
   mass: 1
-  radius: 0.4
-  initialBehaviour: 0
+  radius: 3
+  initialBehaviour: 2
   avoidObstacles: 1
 --- !u!1 &4699210857469071260
 GameObject:

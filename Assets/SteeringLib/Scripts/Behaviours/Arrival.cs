@@ -4,8 +4,7 @@ namespace Himeki.AI.Steering
 {
     public class Arrival : SteeringBehaviour
     {
-        public float arrivalRadius = 5f;
-        public float arrivalMinDistance = 2f;
+        public float decelerationFactor = 0.3f;
 
         public Arrival(SteeringAgent owner)
         : base(owner)
@@ -14,23 +13,17 @@ namespace Himeki.AI.Steering
 
         public override Vector3 step()
         {
-            var desiredVelocity = owner.target.getPosition() - owner.getPosition();
+            var distanceVector = owner.target.getPosition() - owner.getPosition();
+            var distance = distanceVector.magnitude;
 
-            var distance = desiredVelocity.magnitude;
-            if(distance >= arrivalMinDistance)
+            if(distance > Mathf.Epsilon)
             {
-                if (distance < arrivalRadius)
-                {
-                    desiredVelocity = desiredVelocity.normalized * owner.getMaxSpeed() * ((distance - arrivalMinDistance) / arrivalRadius);
-                }
-                else
-                {
-                    desiredVelocity = desiredVelocity.normalized * owner.getMaxSpeed();
-                }
-
+                float speed = Mathf.Min(owner.getMaxSpeed(), distance / decelerationFactor);
+                Vector3 desiredVelocity = distanceVector * speed / distance;
                 var steering = desiredVelocity - owner.getVelocity();
                 return steering;
             }
+
             return Vector3.zero;
         }
     }

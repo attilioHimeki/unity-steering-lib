@@ -14,7 +14,7 @@ namespace Himeki.AI.Steering
         [SerializeField]
         protected internal float mass = 15f;
         [SerializeField]
-        protected internal float radius = 15f;
+        protected internal float radius = 1f;
 
         protected internal MovementModule movementModule;
         protected internal IWorldContextInfoProvider world;
