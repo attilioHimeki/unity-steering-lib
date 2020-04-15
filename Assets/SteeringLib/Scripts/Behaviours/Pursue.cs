@@ -4,6 +4,8 @@ namespace Himeki.AI.Steering
 {
     public class Pursue : SteeringBehaviour
     {
+        public float anticipationFactor = 3f;
+
         public Pursue(SteeringAgent owner)
         : base(owner)
         {
@@ -11,20 +13,14 @@ namespace Himeki.AI.Steering
 
         public override Vector3 step()
         {
-            var target = owner.target;
-            var distanceVector = target.getPosition() - owner.getPosition();
-            float distance = distanceVector.magnitude;
+            IAgent target = owner.target;
 
-            var relativeHeading = Vector3.Dot(owner.getVelocity().normalized, target.getVelocity().normalized);
-            //Todo: Handle case where target and agent are facing each other
+            Vector3 pursueTargetPos = target.getPosition() + target.getVelocity() * anticipationFactor;
 
-            var anticipationMultiplier = distance / owner.getMaxSpeed();
-            var pursueTargetPos = target.getPosition() + target.getVelocity() * anticipationMultiplier;
-            
-            var pursueTargetDistanceVector = pursueTargetPos - owner.getPosition();
-            var desiredVelocity = pursueTargetDistanceVector.normalized * owner.getMaxSpeed();
+            Vector3 pursueTargetDistanceVector = pursueTargetPos - owner.getPosition();
+            Vector3 desiredVelocity = pursueTargetDistanceVector.normalized * owner.getMaxSpeed();
 
-            var steering = desiredVelocity - owner.getVelocity();
+            Vector3 steering = desiredVelocity - owner.getVelocity();
 
             return steering;
         }

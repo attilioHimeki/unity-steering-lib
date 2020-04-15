@@ -4,8 +4,7 @@ namespace Himeki.AI.Steering
 {
     public class Flee : SteeringBehaviour
     {
-        public float safeFleeDistance = 10f;
-
+        public float safeDistance = 10f;
         public Flee(SteeringAgent owner)
         : base(owner)
         {
@@ -15,7 +14,7 @@ namespace Himeki.AI.Steering
         {
             var distanceVector = owner.target.getPosition() - owner.getPosition();
             var distance = distanceVector.magnitude;
-            if (distance < safeFleeDistance)
+            if (distance < safeDistance)
             {
                 var desiredVelocity = distanceVector.normalized * owner.getMaxSpeed();
                 var steering = desiredVelocity - owner.getVelocity();
