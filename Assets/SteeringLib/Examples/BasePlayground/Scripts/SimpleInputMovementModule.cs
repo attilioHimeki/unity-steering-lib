@@ -17,9 +17,9 @@ public class SimpleInputMovementModule : MovementModule
         {
             var movementDirection = inputVector.normalized;
 
-            var steering = movementDirection * owner.getMaxSpeed();
+            velocity = movementDirection * owner.getMaxSpeed();
 
-            return steering;
+            return velocity;
         }
 
         return Vector3.zero;
