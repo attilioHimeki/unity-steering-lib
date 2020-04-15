@@ -12,7 +12,6 @@ namespace Himeki.AI.Steering
         public override Vector3 step()
         {
             var distanceVector = owner.target.getPosition() - owner.getPosition();
-            var distance = distanceVector.normalized;
 
             var desiredVelocity = distanceVector.normalized * owner.getMaxSpeed();
             var steering = desiredVelocity - owner.getVelocity();
