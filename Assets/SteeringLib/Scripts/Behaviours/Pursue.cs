@@ -4,7 +4,7 @@ namespace Himeki.AI.Steering
 {
     public class Pursue : SteeringBehaviour
     {
-        public float anticipationFactor = 3f;
+        public float anticipationFactor = 2f;
 
         public Pursue(SteeringAgent owner)
         : base(owner)
