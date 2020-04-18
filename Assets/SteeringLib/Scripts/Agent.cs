@@ -12,7 +12,7 @@ namespace Himeki.AI.Steering
         [SerializeField]
         protected internal float maxForce = 15f;
         [SerializeField]
-        protected internal float mass = 15f;
+        protected internal float mass = 1f;
         [SerializeField]
         protected internal float radius = 1f;
 
@@ -34,12 +34,13 @@ namespace Himeki.AI.Steering
 
         public virtual void update(float dt)
         {
-            var steering = movementModule.getStep(dt);
-            if (steering.sqrMagnitude >= minSpeed * minSpeed)
+            Vector3 step = movementModule.getStep(dt);
+
+            if(step.sqrMagnitude > Mathf.Epsilon)
             {
-                var movementStep = steering * dt;
-                setForward(steering.normalized);
-                translate(movementStep);
+                translate(step);
+
+                setForward(movementModule.velocity);
             }
         }
 

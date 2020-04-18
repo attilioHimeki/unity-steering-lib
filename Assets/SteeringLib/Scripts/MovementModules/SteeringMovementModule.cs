@@ -96,11 +96,20 @@ namespace Himeki.AI.Steering
 
             steering = Vector3.ClampMagnitude(steering, owner.getMaxForce());
             
-            Vector3 acceleration = steering / owner.getMass();
+            float mass = Mathf.Max(owner.getMass(), 0.1f);
+            Vector3 acceleration = steering / mass;
             velocity += acceleration * dt;
             velocity = Vector3.ClampMagnitude(velocity, owner.getMaxSpeed());
 
-            return velocity;
+            if(velocity.magnitude >= steeringOwner.minSpeed)
+            {
+                Vector3 step = velocity * dt;
+                return step;
+            }
+            else
+            {
+                return Vector3.zero;
+            }
         }
 
     }

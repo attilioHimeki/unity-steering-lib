@@ -9,17 +9,19 @@ public class SimpleInputMovementModule : MovementModule
 
     public override Vector3 getStep(float dt)
     {
-        var inputH = Input.GetAxisRaw("Horizontal");
-        var inputV = Input.GetAxisRaw("Vertical");
+        float inputH = Input.GetAxisRaw("Horizontal");
+        float inputV = Input.GetAxisRaw("Vertical");
 
-        var inputVector = new Vector3(inputH, 0f, inputV);
+        Vector3 inputVector = new Vector3(inputH, 0f, inputV);
         if(inputVector.sqrMagnitude > Mathf.Epsilon)
         {
-            var movementDirection = inputVector.normalized;
+            Vector3 movementDirection = inputVector.normalized;
 
             velocity = movementDirection * owner.getMaxSpeed();
 
-            return velocity;
+            Vector3 step = velocity * dt;
+
+            return step;
         }
 
         return Vector3.zero;

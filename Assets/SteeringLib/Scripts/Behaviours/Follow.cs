@@ -5,7 +5,6 @@ namespace Himeki.AI.Steering
     public class Follow : SteeringBehaviour
     {
         public float followDistance = 3f;
-        public float minFollowSpeed = 0.3f;
 
         public Follow(SteeringAgent owner)
         : base(owner)
@@ -14,14 +13,14 @@ namespace Himeki.AI.Steering
         
         public override Vector3 step()
         {
-            var offset = -owner.target.getForward() * followDistance;
-            var targetFollowPos = owner.target.getPosition() + offset;
-            var desiredVelocity = targetFollowPos - owner.getPosition();
+            Vector3 offset = -owner.target.getForward() * followDistance;
+            Vector3 targetFollowPos = owner.target.getPosition() + offset;
+            Vector3 targetFollowPosDistance = targetFollowPos - owner.getPosition();
 
-            if(desiredVelocity.sqrMagnitude >= minFollowSpeed * minFollowSpeed)
+            if(targetFollowPosDistance.sqrMagnitude > Mathf.Epsilon)
             {
-                desiredVelocity = desiredVelocity.normalized * owner.getMaxSpeed();
-                var steering = desiredVelocity - owner.getVelocity();
+                Vector3 desiredVelocity = targetFollowPosDistance.normalized * owner.getMaxSpeed();
+                Vector3 steering = desiredVelocity - owner.getVelocity();
                 return steering;
             }
 
